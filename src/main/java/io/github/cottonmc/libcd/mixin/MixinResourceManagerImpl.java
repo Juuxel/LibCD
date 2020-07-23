@@ -3,9 +3,13 @@ package io.github.cottonmc.libcd.mixin;
 import com.google.common.base.Charsets;
 import io.github.cottonmc.libcd.api.CDCommons;
 import io.github.cottonmc.libcd.api.condition.ConditionalData;
-import io.github.cottonmc.libcd.impl.ReloadListenersAccessor;
 import io.github.cottonmc.libcd.impl.ResourceSearcher;
-import net.minecraft.resource.*;
+import net.minecraft.resource.NamespaceResourceManager;
+import net.minecraft.resource.ReloadableResourceManager;
+import net.minecraft.resource.ReloadableResourceManagerImpl;
+import net.minecraft.resource.Resource;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceReloadListener;
 import net.minecraft.util.Identifier;
 import org.apache.commons.io.IOUtils;
 import org.spongepowered.asm.mixin.Final;
@@ -17,11 +21,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
 
 @Mixin(ReloadableResourceManagerImpl.class)
-public abstract class MixinResourceManagerImpl implements ReloadableResourceManager, ReloadListenersAccessor, ResourceSearcher {
+public abstract class MixinResourceManagerImpl implements ReloadableResourceManager, ResourceSearcher {
 
 	@Shadow @Final private List<ResourceReloadListener> listeners;
 
@@ -49,11 +57,6 @@ public abstract class MixinResourceManagerImpl implements ReloadableResourceMana
 				}
 			}
 		}
-	}
-
-	@Override
-	public List<ResourceReloadListener> libcd$getListeners() {
-		return listeners;
 	}
 
 	public boolean libcd$contains(Identifier id) {

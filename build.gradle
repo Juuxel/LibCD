@@ -19,7 +19,6 @@ group = "${project.maven_group}"
 version = "${project.mod_version}+${project.minecraft_version}"
 
 minecraft {
-	accessWidener = file("src/main/resources/libcd.accesswidener")
 }
 
 repositories {
@@ -36,12 +35,7 @@ dependencies {
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 	
 	modImplementation "io.github.cottonmc:Jankson-Fabric:${project.jankson_version}"
-	modImplementation "io.github.cottonmc:Parchment:${project.parchment_version}"
 	include "io.github.cottonmc:Jankson-Fabric:${project.jankson_version}"
-	include "io.github.cottonmc:Parchment:${project.parchment_version}"
-
-	modCompileOnly ("com.github.Siphalor:nbt-crafting:1.16-2.0-SNAPSHOT") { transitive = false }
-//	modRuntime ("com.github.Siphalor:nbt-crafting:1.16-2.0-SNAPSHOT") { transitive = false } //only for testing
 }
 
 processResources {

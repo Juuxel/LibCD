@@ -1,9 +1,13 @@
 package io.github.cottonmc.libcd.api.condition;
 
-import blue.endless.jankson.*;
+import blue.endless.jankson.JsonArray;
+import blue.endless.jankson.JsonElement;
+import blue.endless.jankson.JsonNull;
+import blue.endless.jankson.JsonObject;
+import blue.endless.jankson.JsonPrimitive;
 import blue.endless.jankson.api.SyntaxError;
-import io.github.cottonmc.libcd.api.CDSyntaxError;
 import io.github.cottonmc.libcd.api.CDCommons;
+import io.github.cottonmc.libcd.api.CDSyntaxError;
 import net.minecraft.util.Identifier;
 
 import javax.annotation.Nullable;

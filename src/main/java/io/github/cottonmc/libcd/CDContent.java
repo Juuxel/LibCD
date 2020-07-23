@@ -4,28 +4,14 @@ import blue.endless.jankson.JsonArray;
 import blue.endless.jankson.JsonElement;
 import blue.endless.jankson.JsonObject;
 import blue.endless.jankson.JsonPrimitive;
-import io.github.cottonmc.libcd.api.advancement.AdvancementRewardsManager;
 import io.github.cottonmc.libcd.api.CDCommons;
 import io.github.cottonmc.libcd.api.CDSyntaxError;
 import io.github.cottonmc.libcd.api.LibCDInitializer;
 import io.github.cottonmc.libcd.api.condition.ConditionManager;
 import io.github.cottonmc.libcd.api.condition.ConditionalData;
-import io.github.cottonmc.libcd.api.tweaker.TweakerManager;
-import io.github.cottonmc.libcd.api.tweaker.loot.Conditions;
-import io.github.cottonmc.libcd.api.tweaker.loot.Entries;
-import io.github.cottonmc.libcd.api.tweaker.loot.Functions;
-import io.github.cottonmc.libcd.api.tweaker.loot.LootTweaker;
-import io.github.cottonmc.libcd.api.tweaker.util.Nbt;
-import io.github.cottonmc.libcd.api.tweaker.util.TweakerUtils;
-import io.github.cottonmc.libcd.api.tweaker.recipe.RecipeTweaker;
 import net.fabricmc.loader.api.FabricLoader;
-
 import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
 import net.minecraft.tag.TagContainers;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -33,22 +19,6 @@ import net.minecraft.util.registry.Registry;
 import java.util.List;
 
 public class CDContent implements LibCDInitializer {
-	@Override
-	public void initTweakers(TweakerManager manager) {
-		manager.addTweaker("libcd.recipe.RecipeTweaker", RecipeTweaker.INSTANCE);
-		manager.addTweaker("libcd.loot.LootTweaker", LootTweaker.INSTANCE);
-		manager.addAssistant("libcd.util.TweakerUtils", TweakerUtils.INSTANCE);
-		manager.addAssistant("libcd.util.Nbt", Nbt.INSTANCE);
-		manager.addAssistant("libcd.loot.Conditions", Conditions.INSTANCE);
-		manager.addAssistant("libcd.loot.Functions", Functions.INSTANCE);
-		manager.addAssistant("libcd.loot.Entries", Entries.INSTANCE);
-		manager.addStackFactory(new Identifier("minecraft", "potion"), (id) -> {
-			Potion potion = Potion.byId(id.toString());
-			if (potion == Potions.EMPTY) return ItemStack.EMPTY;
-			return PotionUtil.setPotion(new ItemStack(Items.POTION), potion);
-		});
-	}
-
 	@Override
 	public void initConditions(ConditionManager manager) {
 		manager.registerCondition(new Identifier(CDCommons.MODID, "mod_loaded"), value -> {
@@ -190,10 +160,5 @@ public class CDContent implements LibCDInitializer {
 			if (value instanceof Boolean) return (Boolean)value == LibCD.isDevMode();
 			throw new CDSyntaxError("dev_mode must accept a Boolean!");
 		});
-	}
-
-	@Override
-	public void initAdvancementRewards(AdvancementRewardsManager manager) {
-		//no-op
 	}
 }

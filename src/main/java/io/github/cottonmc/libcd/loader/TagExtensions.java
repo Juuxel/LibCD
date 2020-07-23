@@ -3,7 +3,6 @@ package io.github.cottonmc.libcd.loader;
 import blue.endless.jankson.JsonArray;
 import blue.endless.jankson.JsonElement;
 import blue.endless.jankson.JsonObject;
-import io.github.cottonmc.libcd.LibCD;
 import io.github.cottonmc.libcd.api.CDCommons;
 import io.github.cottonmc.libcd.api.CDSyntaxError;
 import io.github.cottonmc.libcd.api.condition.ConditionalData;
@@ -12,10 +11,7 @@ import net.minecraft.util.Identifier;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 
 public final class TagExtensions {
     private TagExtensions() {
